@@ -1,0 +1,54 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[vietnamese]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{a4paper, margin=20mm}
+
+\title{\textbf{BÁO CÁO TIẾN ĐỘ ĐỒ ÁN DATA MINING}\\
+\large Nhận Diện Hoạt Động Con Người Từ Cảm Biến Quán Tính (DSADS)\\
+Khảo Sát Giảm Chiều UMAP và So Sánh SVM, InceptionTime, Transformer}
+\author{Nhóm Đồ Án Khai Phá Dữ Liệu}
+\date{Ngày 04 Tháng 11 Năm 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Báo cáo này tổng hợp tiến độ thực nghiệm đồ án Khai phá Dữ liệu trên tập dữ liệu Daily and Sports Activities Dataset (DSADS). Nghiên cứu so sánh toàn diện ba họ mô hình: Machine Learning cổ điển (SVM với vector đặc trưng thống kê 315 chiều và nhánh giảm chiều phi tuyến UMAP 20 chiều), Mạng nơ-ron tích chập 1D đa tỷ lệ (InceptionTime), và Kiến trúc chú ý tự thân (Time Series Transformer - TST). Quy trình thực nghiệm tuân thủ chặt chẽ nguyên tắc phân chia theo đối tượng (Subject-wise split: Train p1--p5, Validation p6, Test p7--p8) chống rò rỉ dữ liệu. Kết quả cho thấy InceptionTime đạt hiệu năng cao nhất (Validation Macro-F1: 0.9261, Test Acc: 81.45\%), theo sát bởi TST (Val Macro-F1: 0.9212), vượt trội so với SVM Baseline (Val Macro-F1: 0.8586).
+\end{abstract}
+
+\section{Tổng Quan Dữ Liệu DSADS (Notebook 01)}
+Tập dữ liệu DSADS gồm 9.120 mẫu, 19 hoạt động, 8 người, 45 kênh cảm biến quán tính từ 5 cụm IMU (Thân, Tay phải, Tay trái, Chân phải, Chân trái). Kích thước mỗi mẫu là $125 \times 45$ (5 giây tại 25 Hz). Dữ liệu sạch 100\%, không có NaN/Inf. Hiện tượng 312.927 giá trị 0.000 được làm rõ là Tail Zero-Padding ở 1.0s cuối của các hoạt động dừng sớm (a05, a06, a18).
+
+\section{Nhánh Machine Learning: SVM và UMAP (Notebook 02)}
+Vector đặc trưng thống kê 315 chiều được trích xuất từ 7 đại lượng thống kê trên 45 kênh. Kiểm chứng chéo 5-Fold GroupKFold trên tập Train đạt Accuracy $90.58\% \pm 5.09\%$, Macro-F1 $0.8905 \pm 0.0605$.
+Trên tập Validation độc lập (p6), SVM Baseline RBF ($C=3.0, \gamma=0.0015$) đạt Accuracy 88.68\%, Macro-F1 0.8586. Khi kết hợp UMAP giảm xuống 20 chiều, hiệu năng giảm còn 68.33\% Accuracy do tính chất không giám sát làm méo ranh giới phân tách lớp.
+
+\section{Nhánh Deep Learning: InceptionTime và TST (Notebook 03)}
+Dữ liệu chuỗi thời gian được chuẩn hóa Channel-wise Standardization trên tập Train.
+\begin{itemize}
+    \item \textbf{InceptionTime (465.491 tham số)}: Tích chập đa tỷ lệ với các kernel 9, 19, 39 và Residual Shortcut. Đạt Validation Accuracy 92.63\%, Macro-F1 0.9261, Test Accuracy 81.45\%.
+    \item \textbf{Time Series Transformer (75.283 tham số)}: Multi-Head Attention (4 heads, $d=64$, 2 layers). Đạt Validation Accuracy 92.11\%, Macro-F1 0.9212, Test Accuracy 76.67\%.
+\end{itemize}
+
+\section{Bảng Tổng Hợp Kết Quả}
+\begin{table}[h]
+\centering
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Mô hình} & \textbf{Số tham số} & \textbf{Val Macro-F1} & \textbf{Test Acc} & \textbf{Train Time} \\
+\midrule
+SVM Baseline (315D) & $\sim$45.000 SVs & 0.8586 & 81.80\% & $\sim$10s \\
+UMAP (20D) + SVM & $\sim$25.000 SVs & 0.6662 & 71.58\% & $\sim$15s \\
+InceptionTime (1D CNN) & 465.491 & \textbf{0.9261} & \textbf{81.45\%} & 459.6s \\
+Time Series Transformer & 75.283 & 0.9212 & 76.67\% & 241.4s \\
+\bottomrule
+\end{tabular}
+\caption{Đối chiếu hiệu năng giữa các pipeline thực nghiệm.}
+\end{table}
+
+\end{document}
