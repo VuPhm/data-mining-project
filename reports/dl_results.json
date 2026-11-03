@@ -1,0 +1,18 @@
+{
+  "inception_time": {
+    "val_accuracy": 0.9263157894736842,
+    "val_macro_f1": 0.9260731458129035,
+    "test_accuracy": 0.8144736842105263,
+    "test_macro_f1": 0.7994821034185123,
+    "params": 465491,
+    "train_time_seconds": 459.6
+  },
+  "transformer_tst": {
+    "val_accuracy": 0.9210526315789473,
+    "val_macro_f1": 0.9212048192771084,
+    "test_accuracy": 0.7666666666666667,
+    "test_macro_f1": 0.7536128472910482,
+    "params": 75283,
+    "train_time_seconds": 241.4
+  }
+}

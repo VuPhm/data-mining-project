@@ -1,0 +1,17 @@
+{
+  "data_dir": "/Users/vup/Documents/edu/data-mining/data-mining-project/data/raw",
+  "samples": 9120,
+  "expected_samples": 9120,
+  "missing_samples": 0,
+  "complete": true,
+  "sample_shape": [
+    125,
+    45
+  ],
+  "split_counts": {
+    "train": 5700,
+    "validation": 1140,
+    "test": 2280
+  },
+  "source": "https://archive.ics.uci.edu/dataset/256/daily+and+sports+activities"
+}

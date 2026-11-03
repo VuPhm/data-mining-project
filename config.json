@@ -1,0 +1,19 @@
+{
+  "data_dir": "data/raw",
+  "cache_dir": "data/processed",
+  "train_subjects": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "validation_subjects": [
+    6
+  ],
+  "test_subjects": [
+    7,
+    8
+  ],
+  "seed": 42
+}

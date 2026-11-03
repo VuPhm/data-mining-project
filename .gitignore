@@ -1,0 +1,41 @@
+# Môi trường ảo Python & Bộ nhớ đệm
+.venv/
+env/
+venv/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Hệ điều hành & IDE
+.DS_Store
+*/.DS_Store
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+
+# Biến môi trường
+.env
+.env.*
+!.env.example
+
+# Dữ liệu dung lượng lớn (không đưa lên GitHub)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/*.npz
+data/*.zip
+
+# Tệp tạm và sandbox
+scratch/
+tmp/

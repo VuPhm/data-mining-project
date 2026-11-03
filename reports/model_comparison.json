@@ -1,0 +1,40 @@
+{
+  "svm_baseline": {
+    "name": "SVM Baseline (RBF, 315D)",
+    "features": "Statistical Features (315D)",
+    "val_accuracy": 0.8868421052631579,
+    "val_macro_f1": 0.8586401044183607,
+    "test_accuracy": 0.818,
+    "params": "~45.000 SVs",
+    "train_time_seconds": 10.2
+  },
+  "svm_umap": {
+    "name": "UMAP (20D) + SVM",
+    "features": "Non-linear manifold (20D)",
+    "val_accuracy": 0.6833333333333333,
+    "val_macro_f1": 0.6661844257776384,
+    "test_accuracy": 0.7158,
+    "params": "~25.000 SVs",
+    "train_time_seconds": 15.6
+  },
+  "inception_time": {
+    "name": "InceptionTime (1D CNN)",
+    "features": "Raw multi-channel (45, 125)",
+    "val_accuracy": 0.9263157894736842,
+    "val_macro_f1": 0.9260731458129035,
+    "test_accuracy": 0.8144736842105263,
+    "test_macro_f1": 0.7994821034185123,
+    "params": 465491,
+    "train_time_seconds": 459.6
+  },
+  "transformer_tst": {
+    "name": "Time Series Transformer (TST)",
+    "features": "Raw multi-channel (125, 45)",
+    "val_accuracy": 0.9210526315789473,
+    "val_macro_f1": 0.9212048192771084,
+    "test_accuracy": 0.7666666666666667,
+    "test_macro_f1": 0.7536128472910482,
+    "params": 75283,
+    "train_time_seconds": 241.4
+  }
+}
